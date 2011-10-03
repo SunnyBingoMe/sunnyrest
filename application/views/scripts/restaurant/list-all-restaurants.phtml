@@ -1,0 +1,28 @@
+<?php 
+$this->title = "View All Restaurants";
+$this->headTitle($this->title);
+?>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Savour</th>
+        <th>Detail</th>
+        <th>Book Seats</th>
+    </tr>
+
+    <?php 
+    $lineNr = 0;
+    foreach ($this->resultList as $result){
+    ?>
+    <tr bgcolor='<?php echo ($lineNr % 2) ? "": "lavender" ?>'>
+    	<td><?php echo $result['restaurant_name']?></td>
+    	<td><?php echo $result['savour']?></td>
+    	<td><a href='profile?id=<?php echo $result['id'] ?>'>View</a></td>
+    	<td><a href='book?id=<?php echo $result['id'] ?>'>Book Now!</a></td>
+    </tr>
+    <?php 
+        $lineNr++;
+    }
+    ?>
+</table>

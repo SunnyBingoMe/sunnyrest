@@ -1,0 +1,25 @@
+<?php
+echo $this->doctype('XHTML1_TRANSITIONAL')."\n";
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<?php
+	$this->headMeta()->appendHttpEquiv('Content-type', 'text/html;charset=utf-8');
+	echo $this->headMeta();
+	
+	$this->headTitle('Sunny Rest');
+	$this->headTitle()->setSeparator(' - ');
+	echo $this->headTitle();
+	
+//	echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css');
+	?>
+
+</head>
+
+<body>
+    <?php echo $this->render('includes/header.phtml'); ?>
+    <h2><?php echo $this->title; ?></h2>
+    <?php echo $this->layout()->content; ?>
+
+</body>
+</html>

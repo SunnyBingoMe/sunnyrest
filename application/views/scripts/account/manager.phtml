@@ -1,0 +1,39 @@
+<?php 
+$username = $_SESSION['username'];
+$this->title = "{$username}'s Page";
+$this->headTitle($this->title);
+?>
+
+<table>
+<tr>
+    <td valign="top"><!-- PROFILE DATA -->
+    	<table width='300'>
+    		<tr><td>Date Joined: <?php echo $_SESSION['dateJoined'] ?></td></tr>
+    		
+    	</table>
+    </td>
+	<td valign="top"><!--  FAVOURITE LIST -->
+		<table width='300' >
+			<?php if($this->restaurants){ ?>
+			<tr align="center">
+				<th>Restaurant Name</th>
+				<th>In Fav Since</th>
+			</tr>
+			
+			<?php foreach ($this->restaurants as $restaurant){ ?>
+			<tr>
+				<td><a href='restaurant/profile/<?php echo urlencode($restaurant['restaurant_name'])?>' ><?php echo $this->escape($restaurant['restaurant_name'])?></a></td>
+				<td><?php echo $this->escape($restaurant['date_became_fan'])?></td>
+			</tr>
+			<?php 
+			    }
+			}else{ 
+			?>
+			<tr><td>You currently have no favourite restaurants.</td></tr>
+			<?php 
+			}
+			?>
+		</table>
+	</td>
+</tr>
+</table>

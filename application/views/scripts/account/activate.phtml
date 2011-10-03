@@ -1,0 +1,16 @@
+<?php 
+$this->title = "Account Activation";
+$this->headTitle($this->title);
+?>
+<?php 
+if ($this->activated) {
+    ?>
+	Thank you. Your account has now been activated.
+	<?php 
+}else {
+    ?>
+    Your account is not existing or has been activated.
+    <a href='/account/new' >Click here to sign up.</a>
+    <?php
+}
+?>

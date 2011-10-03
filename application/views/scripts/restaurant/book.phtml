@@ -1,0 +1,17 @@
+<?php 
+$this->title = "Booking Seats";
+$this->headTitle($this->title);
+?>
+
+<?php 
+if($this->booked){
+?>
+<h4>Congratulations, your booking email has been sent.</h4>
+<?php 
+}else {
+    echo $this->form;
+}
+
+// print_r ( $this->message);
+
+?>

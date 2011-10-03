@@ -1,0 +1,13 @@
+<?php 
+$this->title = "Add Restaurant";
+$this->headTitle($this->title);
+?>
+<?php if($this->added){?>
+<h3>Great, New Restaurant Added!</h3>
+<?php }?>
+<?php 
+if($this->form) {
+    echo $this->form; 
+}
+?>
+

@@ -1,0 +1,12 @@
+
+   <table>
+   <tr>
+        <td>Rests - <i>Total Rests (<?php echo $this->totalRestaurant; ?>)</i></td>
+   </tr>
+   <?php foreach($this->restaurants as $restaurant){ ?>
+   <tr><td><input type="checkbox" value="<?php echo $this->escape($restaurant['name']) ?>" name="remove[]" /><?php echo $this->escape($restaurant['name'])  ?>
+   		<?php if($this->escape($restaurant['rating']) == 5){ ?>*<?php } ?>
+   </td></tr>
+   <?php } ?>
+   <tr><td><input type="submit" value="Remove"/></td></tr>
+   </table>

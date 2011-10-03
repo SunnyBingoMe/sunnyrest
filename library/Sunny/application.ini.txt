@@ -1,0 +1,12 @@
+[production]
+autoloaderNamespaces[] = Sunny_
+pluginPaths.Sunny_Application_Resource = "Sunny/Application/Resource"
+
+
+resources.db.adapter = PDO_MYSQL
+resources.db.params.host = localhost
+resources.db.params.username = root
+resources.db.params.password = workteam
+resources.db.params.dbname = sunnyrest
+
+

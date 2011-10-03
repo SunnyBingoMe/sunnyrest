@@ -1,0 +1,15 @@
+<?php 
+$this->title = "Sign up Success";
+$this->headTitle($this->title);
+?>
+
+
+	<?php 
+	if($this->errors){
+		echo $this->form;
+	}else{
+		echo "Thank you. You are one step closer to becoming a full member. \n";
+		echo "Please check your email box to activate your account.";
+	}
+	?>
+
