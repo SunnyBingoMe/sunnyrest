@@ -8,7 +8,7 @@ class Application_Form_Login extends Zend_Form
         $this
             ->setMethod('post')
             ->setName('login')
-            ->setAction('/index/index')
+            ->setAction('')
             ;
             
         $email = new Sunny_Form_Element_Email('email');

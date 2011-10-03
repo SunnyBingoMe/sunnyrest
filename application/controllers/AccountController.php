@@ -218,24 +218,29 @@ class AccountController extends Zend_Controller_Action
         $form = new Application_Form_Login();
         if($_POST){
             if ($form->isValid($_POST)) {
-                $tableAccounts = new Application_Model_DbTable_Accounts();
-                if ($tableAccounts->isAuthLogin($form)){
-                    //fetch user data
-                    $userData = $tableAccounts->fetchUserDataByEmail($form->getValue('email'));
-                    
-                    //set user session
-                    $_SESSION['id'] = $userData['id'];
-                    $_SESSION['username'] = $userData['username'];
-                    $_SESSION['email'] = $userData['email'];
-                    $_SESSION['status'] = $userData['status'];
-                    $_SESSION['dateJoined'] = $userData['created_date'];
-                    
-                    $originalUrl = $_SESSION['originalUrl'];
-                    header("Location: $originalUrl");
-                    exit;
-                }else {
-                    $this->view->message = "Username or password incorrect or you have not activate your account via email.";
-                    $this->view->form = $form;
+                try {
+                    $tableAccounts = new Application_Model_DbTable_Accounts();
+                    if ($tableAccounts->isAuthLogin($form)){
+                        //fetch user data
+                        $userData = $tableAccounts->fetchUserDataByEmail($form->getValue('email'));
+                        $this->view->userData = $userData;
+                        
+                        //set user session
+                        $_SESSION['id'] = $userData['id'];
+                        $_SESSION['username'] = $userData['username'];
+                        $_SESSION['email'] = $userData['email'];
+                        $_SESSION['status'] = $userData['status'];
+                        $_SESSION['dateJoined'] = $userData['created_date'];
+                        
+                        $originalUrl = $_SESSION['originalUrl'];
+                        header("Location: $originalUrl");
+                        exit;
+                    }else {
+                        $this->view->message = "Username or password incorrect or you have not activate your account via email.";
+                        $this->view->form = $form;
+                    }
+                }catch (Zend_Db_Exception $e){
+                    echo $e->getMessage();
                 }
             }else {
                 $this->view->form = $form;
