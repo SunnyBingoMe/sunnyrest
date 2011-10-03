@@ -9,11 +9,6 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 autoloaderNamespaces[] = Sunny_
 pluginPaths.Sunny_Application_Resource = "Sunny/Application/Resource"
-resources.db.adapter = PDO_MYSQL
-resources.db.params.host = localhost
-resources.db.params.username = hellosweden
-resources.db.params.password = labPass123
-resources.db.params.dbname = hellosweden
 
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
 [staging : production]
