@@ -21,6 +21,57 @@ class Application_Form_AddRestaurant extends Zend_Form
             ;
         
         
+        $restaurantStreetNr = new Zend_Form_Element_Text('restaurantStreetNr');
+        $restaurantStreetNr
+        ->setLabel('Restaurant Street & No.')
+        ->setRequired()
+        ->addValidator(new Zend_Validate_StringLength(1, 45))
+        ->addFilter(new Zend_Filter_HtmlEntities())
+        ->addFilter(new Zend_Filter_StripTags())
+        //            ->addFilter(new Zend_Filter_StringTrim())
+        ;
+        
+        $restaurantPostcode = new Zend_Form_Element_Text('restaurantPostcode');
+        $restaurantPostcode
+        ->setLabel('Restaurant Postcode')
+        ->setRequired()
+        ->addValidator(new Zend_Validate_StringLength(1, 45))
+        ->addFilter(new Zend_Filter_HtmlEntities())
+        ->addFilter(new Zend_Filter_StripTags())
+        //            ->addFilter(new Zend_Filter_StringTrim())
+        ;
+        
+        $restaurantCity = new Zend_Form_Element_Text('restaurantCity');
+        $restaurantCity
+        ->setLabel('Restaurant City')
+        ->setRequired()
+        ->addValidator(new Zend_Validate_StringLength(1, 45))
+        ->addFilter(new Zend_Filter_HtmlEntities())
+        ->addFilter(new Zend_Filter_StripTags())
+        //            ->addFilter(new Zend_Filter_StringTrim())
+        ;
+        
+        $restaurantArea = new Zend_Form_Element_Text('restaurantArea');
+        $restaurantArea
+        ->setLabel('Restaurant Area')
+        ->setRequired()
+        ->addValidator(new Zend_Validate_StringLength(1, 45))
+        ->addFilter(new Zend_Filter_HtmlEntities())
+        ->addFilter(new Zend_Filter_StripTags())
+        //            ->addFilter(new Zend_Filter_StringTrim())
+        ;
+        
+        $restaurantInfo = new Zend_Form_Element_Text('restaurantInfo');
+        $restaurantInfo
+        ->setLabel('Restaurant Info')
+        ->setRequired()
+        ->addValidator(new Zend_Validate_StringLength(1, 200))
+        ->addFilter(new Zend_Filter_HtmlEntities())
+        ->addFilter(new Zend_Filter_StripTags())
+        //            ->addFilter(new Zend_Filter_StringTrim())
+        ;
+        
+        
         $savours = array("multiOptions"=>array(
 			"Spicy"=>"Spicy",
 			"Crisp"=>"Crisp",
@@ -67,12 +118,25 @@ class Application_Form_AddRestaurant extends Zend_Form
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add Restaurant');
         
+        $latlng = new Zend_Form_Element_Text('latlng');
+        $latlng
+            ->setLabel('Latitude & Longitude')
+            ->setAttrib('maxlength', 25)
+            ->setValue('56.164963,15.588613')
+            ;
+        
         $this->addElements(array(
         	$restaurantName,
+        	$restaurantStreetNr,
+        	$restaurantPostcode,
+        	$restaurantCity,
+        	$restaurantArea,
+	        $restaurantInfo,
         	$savour,
 //        	$isFavouriteList,
 //        	$rating,
             $email,
+        	$latlng,
         	$submit,
         ));
     }

@@ -10,6 +10,8 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="testAction"/>
+          <actionMethod actionName="test"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Account">
@@ -38,6 +40,7 @@
           <actionMethod actionName="saveRestaurant"/>
           <actionMethod actionName="remove"/>
           <actionMethod actionName="book"/>
+          <actionMethod actionName="map"/>
         </controllerFile>
         <controllerFile controllerName="Email">
           <actionMethod actionName="index"/>
@@ -148,6 +151,15 @@
           <viewControllerScriptsDirectory forControllerName="Restaurant">
             <viewScriptFile forActionName="book"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Restaurant">
+            <viewScriptFile forActionName="map"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="testAction"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="test"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -184,6 +196,8 @@
         <testApplicationControllerDirectory>
           <testApplicationControllerFile forControllerName="Index">
             <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="testAction"/>
+            <testApplicationActionMethod forActionName="test"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Account">
             <testApplicationActionMethod forActionName="index"/>
@@ -211,6 +225,7 @@
             <testApplicationActionMethod forActionName="saveRestaurant"/>
             <testApplicationActionMethod forActionName="remove"/>
             <testApplicationActionMethod forActionName="book"/>
+            <testApplicationActionMethod forActionName="map"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Email">
             <testApplicationActionMethod forActionName="index"/>

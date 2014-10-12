@@ -1,0 +1,28 @@
+body {background: url(http://www.mrwallpaper.com/wallpapers/Colorful-New-York-City.jpg); background-size:cover;}
+h1 {text-align: center; font-family: "Courier New", Courier, monospace; }
+a {text-decoration: none; color: gold;}
+.body_header {margin:auto; width:800px; background:none; height:40px;}
+.body_header .nav {position:absolute; float:left; width:200px; height:36px; margin:auto; text-align:left; z-index:9998; background:url(http://www.apple.com/global/nav/images/globalheader.png) repeat-x;  length: 90%;
+	-khtml-border-radius:4px; -ms-border-radius:4px; -o-border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;
+	-khtml-box-shadow:rgba(0,0,0,0.3) 0 1px 2px; -ms-box-shadow:rgba(0,0,0,0.3) 0 1px 2px; -o-box-shadow:rgba(0,0,0,0.3) 0 1px 2px; -moz-box-shadow:rgba(0,0,0,0.3) 0 1px 2px; -webkit-box-shadow:rgba(0,0,0,0.3) 0 1px 2px; box-shadow:rgba(0,0,0,0.3) 0 1px 2px;
+	font:12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+	position:relative; display:block; margin:0; padding:0; zoom:1; z-index:3; }
+.body_header .nav a {position: relative; padding-top: 7px; text-align: center; color: white; font-size: 20px; vertical-align: center; display:inline; float:left; width:200px; height:36px; }
+.body_header #logo a {padding-top: 0px;}
+.body_header .nav a:hover{opacity: 0.4;}
+#logo img {height: 36px;}
+h1 {clear:both; text-align:center; padding:10px; background:rgba(255,255,255, 0.2); width:auto; margin:20px auto 0;}
+h2 {clear:both; text-align:center; padding:10px; background:rgba(255,255,255, 0.2); width:180px; margin:20px auto 0;}
+dl {padding:10px; width: 180px; margin: auto; background:rgba(255,255,255, 0.2); margin: auto;}
+dt {padding:10px; margin: auto;}
+dd {margin: auto;}
+#submit-element {margin:auto;}
+
+* {font-family:"Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;}
+
+/* .zend_form #submit {margin-left: 25%;}
+.zend_form > dt {padding-left: 40%;}
+h2 {text-align: center;}
+
+table {margin: auto}
+*/

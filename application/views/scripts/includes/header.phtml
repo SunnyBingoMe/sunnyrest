@@ -1,25 +1,23 @@
-<table width="100%" cellpadding="0" cellspacing="0">
-    <tr bgcolor="#eeeeee"><td><h1>Sunny Rest (under construction)</h1></td></tr>
-    <tr>
-    	<td>
+	<link type="text/css" rel="stylesheet" href="/asset/css/style.css" />	
+	<div class='body_header'>
+	<div class='nav' id='logo'><a href='/' ><img src="http://sunnyboy.me/photo/_.jpg" /></a></div>
             <?php 
             if(isset($_SESSION['username'])){
                 ?>
-                <a href="/account/manager">
+                <div class='nav' id='account_manager'><a href="/account/manager">@
                 <?php 
                 echo $_SESSION['username'];
                 ?>
-                </a> | <a href='/account/logout'>Log out</a> | 
+                </a></div> <div class='nav' id='account_logout'><a href='/account/logout'>Log out</a></div>
                 <?php 
             }else {
             ?>
-            	<a href='/account/login' >Log in</a> | <a href='/account/new' >Sign up</a> | 
+            	<div class='nav' id='account_login'><a href='/account/login' >Log in</a></div> <div class='nav' id='account_new'><a href='/account/new' >Sign up</a></div> 
                 <?php 
             }?>
-            <a href='/restaurant/list-all-restaurants'>View All Restaurants</a> | 
+            <div class='nav' id='restaurant_list-all-restaurants'><a href='/restaurant/list-all-restaurants'>All Rests</a></div> 
             <?php if(isset($_SESSION['id']) && ($_SESSION['status'] == 'admin') ){ ?>
-            <a href='/restaurant/new'>Add Restaurants</a> | 
-            <?php }?>
-            <!-- My Store</td></tr> -->
-</table>
+            <div class='nav' id='restaurant_list-all-restaurants'><a href='/restaurant/new'>Add Rest</a></div> 
+            <?php } ?>
+	</div>
 <br /><br />

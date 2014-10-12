@@ -11,7 +11,12 @@ echo $this->doctype('XHTML1_TRANSITIONAL')."\n";
 	$this->headTitle()->setSeparator(' - ');
 	echo $this->headTitle();
 	
-//	echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css');
+//    $this->headScript()->appendFile('/file/href?library/Sunny/scripts/sunny_function.js');
+//	$this->headScript()->appendFile("http://sunnyboy.me/personal/ga.js");
+	echo $this->headScript();
+	
+	$this->headLink()->headLink(array('rel'=>"SHORTCUT ICON", 'href'=>'http://sunnyboy.me/photo/_.jpg'));
+	echo $this->headLink();	
 	?>
 
 </head>
@@ -21,5 +26,6 @@ echo $this->doctype('XHTML1_TRANSITIONAL')."\n";
     <h2><?php echo $this->title; ?></h2>
     <?php echo $this->layout()->content; ?>
 
+<div id='bottom'></div>
 </body>
 </html>

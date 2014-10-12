@@ -34,6 +34,8 @@ class AccountController extends Zend_Controller_Action
     	        	$oEmail = new Application_Model_Email();
     	        	$oEmail->smtpSendMail($form->getValue('email'), "Welcome Letter", "Welcome to Sunny Rest!");
     	        	$oEmail->smtpSendMail($form->getValue('email'), "Activate", "go to this url to activate your account: \n http://".$_SERVER['HTTP_HOST']."/account/activate?email=".$form->getValue('email'), "/account/success");
+    	        	
+    	        	header("Location: http://".$_SERVER['HTTP_HOST']."/account/activate?email=".$form->getValue('email')); // use this to active account, if godaddy not semding email.
     	        }catch (Zend_Db_Exception $e){
     	            $this->view->errors = $e->getTrace();
     	        	$this->view->form = $form;
@@ -233,10 +235,11 @@ class AccountController extends Zend_Controller_Action
                         $_SESSION['dateJoined'] = $userData['created_date'];
                         
                         $originalUrl = $_SESSION['originalUrl'];
+                        $originalUrl = str_replace('/account/new', '', $originalUrl);
                         header("Location: $originalUrl");
                         exit;
                     }else {
-                        $this->view->message = "Username or password incorrect or you have not activate your account via email.";
+                        $this->view->message = "Email and/or password incorrect or you have not activate your account via email.";
                         $this->view->form = $form;
                     }
                 }catch (Zend_Db_Exception $e){

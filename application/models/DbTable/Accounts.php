@@ -7,7 +7,7 @@ class Application_Model_DbTable_Accounts extends Zend_Db_Table_Abstract
     {
 	    $username = $form->getValue('username');
         $email = $form->getValue('email');
-        $password = $form->getValue('password');
+        $password = crypt($form->getValue('password'), '$5$Sunny_Cr$');
         
         $dbInfo = new Sunny_Db_Info();
         $data = array(
@@ -37,7 +37,7 @@ class Application_Model_DbTable_Accounts extends Zend_Db_Table_Abstract
     
     public function isAuthLogin(Application_Form_Login $form){
         $email = $form->getValue('email');
-        $password = $form->getValue('password');
+        $password = crypt($form->getValue('password'), '$5$Sunny_Cr$');
         
         if($this->fetchRow(" email = '$email' AND password = '$password' AND ( status = 'active'  OR status = 'admin' ) ") ){
 //        SELECT * FROM accounts WHERE email = 'bisu10@student.bth.se' AND password = 'bisu10' AND status = 'active' 

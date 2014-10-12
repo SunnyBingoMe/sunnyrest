@@ -10,7 +10,7 @@ $this->headTitle($this->title);
 <?php $currentUrl = ((!empty($_SERVER['HTTPS'])) ? "https://" : "http://").$_SERVER['SERVER_NAME'].(($_SERVER["SERVER_PORT"] == "80")?"":(":".$_SERVER["SERVER_PORT"])).$_SERVER['REQUEST_URI']; ?>
 
 
-<br /><div id="fb-root"></div>
+<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
@@ -18,21 +18,40 @@ $this->headTitle($this->title);
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<fb:like href="<?php echo $currentUrl ?>" send="true" layout="button_count" width="450" show_faces="false"></fb:like><br />
-<br />
+
+<!-- facebook -->
+<fb:like href="<?php echo $currentUrl ?>" send="true" layout="button_count" show_faces="false"></fb:like>
 
 <!-- facebook html5 version
-<div class="fb-like" data-href="<?php echo $currentUrl ?>" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-<br />
+<div class="fb-like" data-href="<?php echo $currentUrl ?>" data-send="true" data-layout="button_count" data-show-faces="false"></div>
  -->
 
+<!-- twitter --><br/>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-<br />
 
+<!-- gplus --><br/>
+<g:plusone size="medium" annotation="inline"></g:plusone>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
 
+<br/><br/><br/>
+<a href='/restaurant/map/?map=<?php echo $result['map']?>#bottom' target='blank'>Google Map</a>
+<br/>
 <b>
 	Savour: <?php echo $result['savour']?><br>
+	Street & No: <?php echo $result['restaurantStreetNr']?><br>
+	Postcode: <?php echo $result['restaurantPostcode']?><br>
+	City: <?php echo $result['restaurantCity']?><br>
+	Area: <?php echo $result['restaurantArea']?><br>
+	Info: <?php echo $result['restaurantInfo']?><br>
 	Email: <?php echo $result['email']?><br>
+	<?php if(false){ ?>
 	<a href='book?id=<?php echo $result['id'] ?>'>Book Seats Now!</a>
+	<?php } ?>
 </b>

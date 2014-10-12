@@ -3,4 +3,20 @@ $this->title = "Sign up";
 $this->headTitle($this->title);
 ?>
 
-	<?php echo $this->form; ?>
+	<?php 
+	if (getDomain() == "rest.sunnyboy.me"){
+		?>
+		<pre>
+		Administration and Resgistration is not allowed for online Demo.
+		Please use:
+		
+		email: test@example.com
+		passwd:guesttest
+		
+		to login.
+		</pre>
+		<?php 
+    }else {
+		echo $this->form; 
+	}
+	?>

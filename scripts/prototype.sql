@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `status` varchar(10) DEFAULT 'pending',
   `email_newsletter_status` varchar(3) DEFAULT 'out',
   `email_type` varchar(4) DEFAULT 'text',
@@ -55,14 +55,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `email`, `password`, `status`, `email_newsletter_status`, `email_type`, `email_favorite_restaurants_status`, `created_date`) VALUES
-(1, 'test_4', 'test4@loudbite.com', 'password', 'active', 'out', 'text', 'out', '0000-00-00 00:00:00'),
-(2, 'test_5', 'test5@loudbite.com', 'password', 'active', 'out', 'text', 'out', '0000-00-00 00:00:00'),
-(3, 'test_6', 'test6@loudbite.com', 'password', 'active', 'out', 'text', 'out', '0000-00-00 00:00:00'),
-(4, 'test_7', 'test7@loudbite.com', 'password', 'active', 'out', 'text', 'out', '0000-00-00 00:00:00'),
-(5, 'test_3', 'test3@loudbite.com', 'password', 'active', 'out', 'text', 'out', '2011-09-29 14:17:15'),
-(17, 'xiaodaselang', 'SinoSolomon@gmail.com', '666', 'pending', 'out', 'text', 'out', '2011-09-29 16:18:47'),
-(18, 'bisu10', 'bisu10@student.bth.se', 'bisu10', 'admin', 'out', 'text', 'out', '2011-10-01 14:17:28'),
-(22, 'sunnybingome', 'SunnyBingoMe@gmail.com', 'bisu10', 'admin', 'out', 'text', 'out', '2011-10-02 11:55:27');
+(1, 'admin', 'admin@SunnyBoy.Me', '$5$Sunny_Cr$QcdGV8hZFl5CQMTKBLGrNLfN7irQI8T.OD7w4ejIU06', 'admin', 'out', 'text', 'out', '2011-09-29 16:18:47'),
+(2, 'guest', 'test@example.com', '$5$Sunny_Cr$NcFbups54EgCe6CLQWDzgMz6H9c3HM6jlkMhHKvyazC', 'active', 'out', 'text', 'out', '2011-09-29 20:18:47');
 
 -- --------------------------------------------------------
 
@@ -105,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
   `savour` varchar(100) NOT NULL,
   `created_date` datetime DEFAULT NULL,
   `email` varchar(200) NOT NULL,
+  `map` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -112,9 +107,9 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `restaurant_name`, `savour`, `created_date`, `email`) VALUES
-(1, 'New Peking', 'Crisp', '2011-10-02 18:30:10', 'SunnyBingoMe@gmail.com'),
-(2, 'Thai', 'Spicy', '2011-10-02 18:30:39', 'SinoSolomon@gmail.com'),
-(3, 'Mountain View', 'Grilled', '2011-10-02 18:34:23', 'bisu10@student.bth.se'),
-(5, 'McDonald''s', 'Greasy', '2011-10-02 10:15:31', 'OceanRhymes@gmail.com');
+INSERT INTO `restaurants` (`id`, `restaurant_name`, `savour`, `created_date`, `email`, `map` ) VALUES
+(1, 'New Peking', 'Crisp', '2011-10-02 18:30:10', 'SunnyPeking@SunnyBoy.me', '56.164952,15.588477'),
+(2, 'Thai', 'Spicy', '2011-10-02 18:30:39', 'SunnyThai@SunnyBoy.me', '56.16177,15.584571'),
+(3, 'Mountain View', 'Grilled', '2011-10-02 18:34:23', 'SunnyView@SunnyBoy.me', '56.173989,15.601491'),
+(5, 'McDonald''s', 'Greasy', '2011-10-02 10:15:31', 'SunnyMc@SunnyBoy.me', '56.162627,15.585071');
 COMMIT;

@@ -143,8 +143,9 @@ class RestaurantController extends Zend_Controller_Action
     	                "Sunny Rest"
     	            ;
     	            $mail = new Application_Model_Email();
-    	            $mail->smtpSendMail($result['email'], "New Booking", $bodyText);
-    	        
+    	            if (! (getDomain() == "rest.sunnyboy.me")){
+	    	            $mail->smtpSendMail($result['email'], "New Booking", $bodyText);
+    	            }
     	        }catch (Zend_Db_Exception $e){
     	            echo $e->getTrace();
     	            $this->view->form = $form;
@@ -161,11 +162,16 @@ class RestaurantController extends Zend_Controller_Action
     	
     	
     }
-    
-    
-    
+
+    public function mapAction()
+    {
+        // action body
+    }
+
 
 }
+
+
 
 
 

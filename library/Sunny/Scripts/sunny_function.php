@@ -1,50 +1,80 @@
 <?php 
-/////////////////////////////////////Modified by: BinSun@mail.com 20110929/////////////////////////////////////
-$sOk = 0;
-$dbug = 1;
-$dbugOk = 0;
-$dDbug = 1;
-$dDbugOk = 0;
+include_once "private.php";
+/////////////////////////////////////Modified by: BinSun@mail.com/////////////////////////////////////
+$GLOBALS['sOk'] = 0;
+$GLOBALS['dbug'] = 1;
+$GLOBALS['dbugOk'] = 0;
+$GLOBALS['dDbug'] = 1;
+$GLOBALS['dDbugOk'] = 0;
 function say($say) {
-	if (is_array ( $say )) {
-		print_r ( $say );
+	if (is_array ( $say ) || is_object($say)) {
+		echo("<pre>");
+	    var_dump( $say );
+	    echo("</pre>");
 		brn ();
 	} else {
 		echo $say . "<br/>\n";
 	}
+	return true;
 }
 function sayOk($say) {
-	global $sOk;
-	if ($sOk) {
+	if ($GLOBALS['sOk']) {
 		say ( $say );
+		return true;
 	}
 }
 function debug($say) {
-	global $dbug;
-	if ($dbug) {
+	if ($GLOBALS['dbug']) {
 		say ( $say );
+		return true;
 	}
 }
 function debugOk($say) {
-	global $dbugOk;
-	if ($dbugOk) {
+	if ($GLOBALS['dbugOk']) {
 		say ( $say );
+		return true;
 	}
 }
 function dDebug($say) {
-	global $dDbug;
-	if ($dDbug) {
+	if ($GLOBALS['dDbug']) {
 		say ( $say );
+		return true;
 	}
 }
 function dDebugOk($say) {
-	global $dDbugOk;
-	if ($dDbugOk) {
+	if ($GLOBALS['dDbugOk']) {
 		say ( $say );
+		return true;
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// (web source) display
+function htmlentitiesTwo($string, $tQuotes = ENT_QUOTES, $charSet = "UTF-8"){
+	return preg_replace(
+		"/&amp;([A-Za-z]{0,4}\w{2,3};|#[0-9]{2,3};)/",
+		"&$1",
+		htmlentities($string, $tQuotes, $charSet)
+	);
+}
+function sunnyEscape($string) {
+	$stringToEscape = $string;
+	
+	//clean
+	$stringToEscape = strip_tags($stringToEscape);
+	$stringToEscape = htmlentitiesTwo($stringToEscape, ENT_QUOTES, "UTF-8");
+	
+	return $stringToEscape;
+}
+function sunnySimpleEscape($string) {
+	$stringToEscape = $string;
+	
+	//clean
+	$stringToEscape = strip_tags($stringToEscape);
+	$stringToEscape = htmlspecialchars($stringToEscape, ENT_QUOTES, "UTF-8");
+	
+	return $stringToEscape;
+}
 function brn($number = 1) {
+	$tStringNbsp = "";
 	for(; $number > 0; $number --) {
 		$tStringNbsp .= "<br />\n";
 	}
@@ -80,18 +110,34 @@ function returnNbsp($number = 1) {
 	}
 	return $tStringNbsp;
 }
-?>
-<?php
+
 
 function timetostr($time) {
 	return date ( "Y-m-d H:i:s", $time );
 }
+function timetodate($time) {
+	return date ( "Y-m-d", $time );
+}
+function getCurrentYear($time) {
+	return date ( "Y", $time );
+}
 
-?>
-<?php //////////////////////////////////////////////////////////////////////////////////////////////////////////// check something modify something 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////// check something modify something 
+function strleft($s1, $s2)
+{
+    return substr($s1, 0, strpos($s1, $s2));
+}
+function getDomain() {
+	return $_SERVER['HTTP_HOST'];
+}
+function getRootDomain() {
+	preg_match("/[^\.\/]+\.[^\.\/]+$/", getDomain(), $matches);
+	return $matches[0];
+}
+
 // check email address 
 function isEmailAddress($string){
-	if (! preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i", $string)) {
+	if (! preg_match('/^[^@\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/i', $string)) {
 		return FALSE;
 	}else {
 		return TRUE;
@@ -126,8 +172,7 @@ function replaceNonAlphabetWithUnderline($string) {
 	return $string;
 }
 
-?>
-<?php
+
 
 function inputText2VariableName($inputText) { // no spaces , only lower, captical and _
 	$inputText = trim ( $inputText );
@@ -147,8 +192,13 @@ function inputText2UserName($inputText) { // no spaces, only lower cases
 	$inputText = replaceNonAlphabetWithUnderline ( trimAnyWhere ( $inputText ) );
 	return $inputText;
 }
-?>
-<?php //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// file 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// file 
+function appendFile($fileName, $string) {
+    $fh = fopen($fileName, 'a') or die("can't open file");
+    fwrite($fh, $string);
+    fclose($fh);
+}
 function make_csv_line($array) {
     // If a value contains a comma, a quote, a space, a 
     // tab (\t), a newline (\n), or a linefeed (\r),
@@ -167,8 +217,9 @@ function make_csv_line($array) {
     // Join together each value with a comma and tack on a newline
     return implode(',', $array) . "\n";
 }
-?>
-<?php //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// array
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// array
 
 // trim every item and del emptys
 function trimArray(array $tArray) {
@@ -204,14 +255,30 @@ function resizeArrayByProbability($array, $probabilityOfInUse) {
 	}
 	return $array;
 }
-?>
-<?php ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// http header
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// http header
+function getRawQueryString() {
+    return $_SERVER['QUERY_STRING'];
+}
+
+function getRawPostString() {
+    return file_get_contents("php://input");
+}
+
 function sendHttpHeaderCsvFile() {
 	header('Content-Type: text/csv');
 	header('Content-Disposition: attachment; filename="dishes.csv"');
 }
-?>
-<?php //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// web js
+
+function http301ThenExit($toUrl = "."){
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: " . $toUrl);
+	exit (0);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// web js
 function getSelfUrl() {
 	if (! isset ( $_SERVER ['REQUEST_URI'] )) {
 		$serverrequri = $_SERVER ['PHP_SELF'];
@@ -289,37 +356,38 @@ function input_button_setAllCheckboxUnselected($formname, $checkboxName) {
 	<input type="button" onclick="SetAllCheckbox('$formname', '$checkboxName', false);" value="None">
 input_button_setAllCheckboxUnselected;
 }
-?>
-<?php ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// form
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// form
 
 // hidden 
 function input_hidden($element_name, $aElementValuePairList) {
 	print '<input type="hidden" name="' . $element_name . '" value="';
-	print htmlentities ( $aElementValuePairList [$element_name] ) . '">';
+	print htmlentitiesTwo ( $aElementValuePairList [$element_name] ) . '">';
 }
 
 // password box
 function input_password($element_name, $aElementValuePairList = array(), $maxlength = 45) {
 	print '<input type="password" maxlength="' . $maxlength . '" name="' . $element_name . '" value="';
-	print htmlentities ( $aElementValuePairList [$element_name] ) . '">';
+	print htmlentitiesTwo ( $aElementValuePairList [$element_name] ) . '">';
 }
 
 // text box
 function input_text($element_name, $aElementValuePairList = array(), $maxlength = 45) {
 	print '<input type="text" maxlength="' . $maxlength . '" name="' . $element_name . '" value="';
-	print htmlentities ( $aElementValuePairList [$element_name] ) . '">';
+	print htmlentitiesTwo ( $aElementValuePairList [$element_name] ) . '">';
 }
 
 // submit button
 function input_submit($element_name = "submit", $aElementValuePairList = array("submit"=>" OK ")) {
 	print '<input type="submit" name="' . $element_name . '" value="';
-	print htmlentities ( $aElementValuePairList [$element_name] ) . '"/>';
+	print htmlentitiesTwo ( $aElementValuePairList [$element_name] ) . '"/>';
 }
 
 // textarea
 function input_textarea($element_name, $aElementValuePairList = array(), $maxlength = 495) {
 	print '<textarea maxlength="' . $maxlength . '" name="' . $element_name . '">';
-	print htmlentities ( $aElementValuePairList [$element_name] ) . '</textarea>';
+	print htmlentitiesTwo ( $aElementValuePairList [$element_name] ) . '</textarea>';
 }
 
 // radio button or checkbox
@@ -329,7 +397,7 @@ function input_radiocheck($type, $element_name, $aElementValuePairList, $element
 		print ' checked="checked"';
 	}
 	print '/>';
-	print htmlentities ( $lable );
+	print htmlentitiesTwo ( $lable );
 }
 
 // radio button  
@@ -339,7 +407,7 @@ function input_radio($element_name, $aElementValuePairList, $element_value, $lab
 		print ' checked="checked"';
 	}
 	print '/>';
-	print htmlentities ( $lable );
+	print htmlentitiesTwo ( $lable );
 }
 
 // checkbox button 
@@ -349,7 +417,7 @@ function input_checkbox($element_name, $aElementValuePairList, $element_value, $
 		print ' checked="checked"';
 	}
 	print '/>';
-	print htmlentities ( $lable );
+	print htmlentitiesTwo ( $lable );
 }
 
 // <select> menu
@@ -375,12 +443,59 @@ function input_select($element_name, $aElementValuePairList, $aOptionLabelPairLi
 	
 	// print out the <option> tags
 	foreach ( $aOptionLabelPairList as $option => $label ) {
-		print '<option value="' . htmlentities ( $option ) . '"';
+		print '<option value="' . htmlentitiesTwo ( $option ) . '"';
 		if ($selected_options [$option]) {
 			print ' selected="selected"';
 		}
-		print '>' . htmlentities ( $label ) . '</option>';
+		print '>' . htmlentitiesTwo ( $label ) . '</option>';
 	}
 	print '</select>';
 }
-?>
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// security
+function stringDigest($tString){
+	if(!isset($_SESSION['sharedPrivateKey'])) return FALSE;
+	return hash_hmac("sha256", $tString, $_SESSION['sharedPrivateKey']);
+}
+
+function string2StringEncrypt($tString){
+	if(!isset($_SESSION['sharedPrivateKey'])) return FALSE;
+	return base64_encode(mcrypt_encrypt(MCRYPT_DES, $_SESSION['sharedPrivateKey'], $tString, MCRYPT_MODE_ECB));
+}
+
+function string2StringDecrypt($tString){
+	if(!isset($_SESSION['sharedPrivateKey'])) return FALSE;
+	return mcrypt_decrypt(MCRYPT_DES, $_SESSION['sharedPrivateKey'], base64_decode($tString), MCRYPT_MODE_ECB);
+}
+
+function array2EncryptJsonWithMac($tArray){
+	$tArray = json_encode($tArray);
+	$tArrayHash = stringDigest($tArray);
+	$tArray = implode("--sunny--", array($tArray, $tArrayHash));
+	return string2StringEncrypt($tArray);
+}
+
+function encryptJsonWithMac2Array($tString){
+	$tString = explode("--sunny--", string2StringDecrypt($tString));
+	if (strpos($tString[1], stringDigest($tString[0])) === false ){ // TODO: the length of $tString[1] might be longer than the hash of $tString[0], weird.
+		return FALSE;
+	}
+	return json_decode($tString[0], true);
+}
+
+function deleteAllCookie(){
+	if (isset($_SERVER['HTTP_COOKIE'])) {
+		$cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+		foreach($cookies as $cookie) {
+			$parts = explode('=', $cookie);
+			$name = trim($parts[0]);
+			setcookie($name, '', time()-360000);
+			setcookie($name, '', time()-360000, '/');
+			setcookie($name, '', time()-360000, '/', ".".getDomain());
+		}
+	}
+}
+
+function getRemoteEndId(){
+	return crc32($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
+}

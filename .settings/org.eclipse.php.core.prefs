@@ -1,5 +1,4 @@
-#Wed Sep 28 12:32:08 CEST 2011
 eclipse.preferences.version=1
-include_path=0;/sunnyrest
+include_path=5;org.zend.php.framework.CONTAINER\u00055;com.zend.php.phpunit.CONTAINER\u00050;/sunnyrest.portable
 phpVersion=php5.3
 use_asp_tags_as_php=false
